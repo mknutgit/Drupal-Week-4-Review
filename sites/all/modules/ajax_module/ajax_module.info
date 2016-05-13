@@ -1,0 +1,5 @@
+name = Ajax view of articles
+description = Display articles with Ajax.
+package = Code Review
+core = 7.x
+files [] = ajax_module.module
