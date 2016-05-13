@@ -1,0 +1,64 @@
+<?php
+
+function dna_module_menu() {
+    $items['dna_code'] = array(
+        'title' => 'See your DNA code:',
+        'page callback'=> 'drupal_get_form',
+        'page arguments' => array('dna_module_form'),
+        'access callback' => TRUE,
+        'type' => MENU_NORMAL_ITEM,
+    );
+
+    $items['dna_module_result'] = array(
+        'title'=> 'Here is your code',
+        'page callback' => 'dna_module_result',
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+    );
+    return $items;
+}
+
+
+function dna_module_form() {
+    //Container wrapping the form///
+    $form['dna_module_container'] = array(
+        '#title' => 'DNA',
+        '#type' => 'fieldset',
+    );
+    $form['dna_module_container']['input_code'] = array(
+        '#title' => 'Input Code',
+        '#type' => 'textfield',
+        '#description' => t("Input half of your DNA code.  You can only enter uppercase A, T, C or G.  There shoud be no spaces.  The DNA generator will complete your DNA double helix"),
+    );
+
+    $form['dna_module_container']['submit'] = array(
+        '#type' => 'submit',
+        '#value' => 'Go!'
+    );
+
+    return $form;
+}
+
+// function element_validate_input_code($element) {
+//     $code_input = ($element['#value']);
+//     if (preg_match('/^[ACTG ]*$/', $phrase_input) == false) {
+//         form_error($element, T('Please only use uppercase A, T, C or G!'));
+//     }
+// }
+
+function dna_module_form_submit($form, &$form_state) {
+
+    $input_code = $form_state['values']['input_code'];
+    // $result = dna_module_double_helix($input_code);
+    echo($input_code);
+
+
+
+    $_SESSION['dna_helix'] = $input_code;
+    $form_state['redirect'] = 'dna_module_result';
+}
+
+function dna_module_result() {
+    $dna_helix = $_SESSION['dna_helix'];
+    return $dna_helix;
+}

@@ -1,0 +1,7 @@
+name = DNA Module
+desctiption = Finishes a users DNA code depending on their entries.
+package = Code Review
+core = 7.x
+files [] = dna_module.module
+files [] = dna_module.test
+dependencies[] = simpletest
