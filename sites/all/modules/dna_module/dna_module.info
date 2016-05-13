@@ -1,7 +1,7 @@
-name = DNA Module
-desctiption = Finishes a users DNA code depending on their entries.
-package = Code Review
+name = Nucleotide Matcher
+description = Completes DNA input
+package = Custom Modules
 core = 7.x
-files [] = dna_module.module
-files [] = dna_module.test
+files[] = dna_module.module
+files[] = dna_module.test
 dependencies[] = simpletest

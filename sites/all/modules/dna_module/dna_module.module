@@ -10,14 +10,13 @@ function dna_module_menu() {
     );
 
     $items['dna_module_result'] = array(
-        'title'=> 'Here is your dna helix',
+        'title'=> 'Here is your dna helix:',
         'page callback' => 'dna_module_result',
         'access callback' => TRUE,
         'type' => MENU_CALLBACK,
     );
     return $items;
 }
-
 
 function dna_module_form() {
     //Container wrapping the form///
@@ -49,13 +48,9 @@ function element_validate_input_code($element) {
     }
 }
 
-function dna_module_form_submit($form, &$form_state) {
+function dna_helix($input_code) {
 
     $complete_dna = "";
-
-    $input_code = $form_state['values']['input_code'];
-    //Capture initial input for dna helix display //
-    $_SESSION['dna_input'] = $input_code;
 
     $input_split = str_split($input_code);
 
@@ -71,11 +66,22 @@ function dna_module_form_submit($form, &$form_state) {
         } else {
             $complete_dna .= $dna;
         }
-
-        $_SESSION['dna_helix_complete'] = $complete_dna;
-        // redirect to results page //
-        $form_state['redirect'] = 'dna_module_result';
     }
+
+    return $complete_dna;
+}
+
+function dna_module_form_submit($form, &$form_state) {
+
+    $input_code = $form_state['values']['input_code'];
+    //Capture initial input for dna helix display in result //
+    $_SESSION['dna_input'] = $input_code;
+
+    $result = dna_helix($input_code);
+
+    $_SESSION['dna_helix_complete'] = $result;
+        // redirect to results page //
+    $form_state['redirect'] = 'dna_module_result';
 }
 
 function dna_module_result() {

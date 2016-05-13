@@ -1,0 +1,27 @@
+<?php
+class DnaModuleTestCase extends DrupalUnitTestCase
+{
+
+    public static function getInfo()
+    {
+        return array(
+        'name' => 'DNA module Tests',
+        'description' => 'Test that my DNA Module works correctly.',
+        'group' => 'DNA',
+        );
+    }
+
+    function testDnaHelix()
+    {
+
+        $description = 'Input of A should return T.';
+
+        $input = 'A';
+
+        $result = dna_helix($input);
+
+        $expected_output = 'T';
+        $this->assertEqual($result, $expected_output, $description);
+
+    }
+}
