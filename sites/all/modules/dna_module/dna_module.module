@@ -29,6 +29,8 @@ function dna_module_form() {
         '#title' => 'Input Code',
         '#type' => 'textfield',
         '#description' => t("Input half of your DNA code.  You can only enter uppercase A, T, C or G.  There shoud be no spaces.  The DNA generator will complete your DNA double helix"),
+        '#element_validate' => array('element_validate_input_code'),
+        '#required' => TRUE,
     );
 
     $form['dna_module_container']['submit'] = array(
@@ -39,12 +41,12 @@ function dna_module_form() {
     return $form;
 }
 
-// function element_validate_input_code($element) {
-//     $code_input = ($element['#value']);
-//     if (preg_match('/^[ACTG ]*$/', $phrase_input) == false) {
-//         form_error($element, T('Please only use uppercase A, T, C or G!'));
-//     }
-// }
+function element_validate_input_code($element) {
+    $code_input = ($element['#value']);
+    if (preg_match('/^[ACTG ]*$/', $code_input) == false) {
+        form_error($element, T('Please only use uppercase A, T, C or G!'));
+    }
+}
 
 function dna_module_form_submit($form, &$form_state) {
 
