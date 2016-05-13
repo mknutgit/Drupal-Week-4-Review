@@ -10,7 +10,7 @@ function dna_module_menu() {
     );
 
     $items['dna_module_result'] = array(
-        'title'=> 'Here is your code',
+        'title'=> 'Here is your dna helix',
         'page callback' => 'dna_module_result',
         'access callback' => TRUE,
         'type' => MENU_CALLBACK,
@@ -43,18 +43,19 @@ function dna_module_form() {
 
 function element_validate_input_code($element) {
     $code_input = ($element['#value']);
+    //Validate only capitol A, C, T, or G can be entered//
     if (preg_match('/^[ACTG ]*$/', $code_input) == false) {
         form_error($element, T('Please only use uppercase A, T, C or G!'));
     }
 }
-
-
 
 function dna_module_form_submit($form, &$form_state) {
 
     $complete_dna = "";
 
     $input_code = $form_state['values']['input_code'];
+    //Capture initial input for dna helix display //
+    $_SESSION['dna_input'] = $input_code;
 
     $input_split = str_split($input_code);
 
@@ -71,12 +72,13 @@ function dna_module_form_submit($form, &$form_state) {
             $complete_dna .= $dna;
         }
 
-        $_SESSION['dna_helix'] = $complete_dna;
+        $_SESSION['dna_helix_complete'] = $complete_dna;
+        // redirect to results page //
         $form_state['redirect'] = 'dna_module_result';
     }
 }
 
 function dna_module_result() {
-    $dna_helix = $_SESSION['dna_helix'];
-    return $dna_helix;
+
+    return  $_SESSION['dna_input'] . "<br>" . $_SESSION['dna_helix_complete'];
 }
