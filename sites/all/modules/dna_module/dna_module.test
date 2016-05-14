@@ -5,7 +5,7 @@ class DnaModuleTestCase extends DrupalUnitTestCase
     public static function getInfo()
     {
         return array(
-        'name' => 'DNA module Tests',
+        'name' => 'DNA unit tests',
         'description' => 'Test that my DNA Module works correctly.',
         'group' => 'DNA',
         );
@@ -23,5 +23,39 @@ class DnaModuleTestCase extends DrupalUnitTestCase
         $expected_output = 'T';
         $this->assertEqual($result, $expected_output, $description);
 
+        $description = 'Input of ATCG should return TACG.';
+
+        $input = 'ATCG';
+
+        $result = dna_helix($input);
+
+        $expected_output = 'TAGC';
+        $this->assertEqual($result, $expected_output, $description);
+
+
     }
+}
+
+class DnaModuleTests extends DrupalWebTestCase {
+
+    public static function getInfo() {
+        return array(
+            'name' => 'DNA Module Functional Tests',
+            'description' => 'Tests the DNA module.',
+            'group' => 'DNA',
+        );
+    }
+
+    public function setUp() {
+        parent::setUp(array('dna_module'));
+    }
+
+    public function testDnaModuleNavigation() {
+        // Navigate to the URL created by the DNA Module.
+        $this->drupalGet('dna_module_result');
+        // Assert that the text we want to see if actually there on the page.
+        $this->assertText('Here is your dna helix', 'The text on the page is correct.');
+    }
+
+
 }
