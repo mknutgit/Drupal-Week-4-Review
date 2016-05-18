@@ -21,7 +21,7 @@
 
 * Clone this repository
 * Set document root to the top level directory of the repository in MAMP
-* Import the database, called "code_review.sql(1).zip", found in `sites/db-backup`
+* Import the database, called "code_review.sql.zip", found in `sites/db-backup`
 * Create a user for the database: username = "admin", password = "admin"
 * Choose "localhost" for HOST:"
 * navigate to [localhost:8888](localhost:8888)
