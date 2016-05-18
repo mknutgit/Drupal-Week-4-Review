@@ -50,12 +50,13 @@ class DnaModuleTests extends DrupalWebTestCase {
         parent::setUp(array('dna_module'));
     }
 
-    public function testDnaModuleNavigation() {
-        // Navigate to the URL created by the DNA Module.
-        $this->drupalGet('dna_module_result');
-        // Assert that the text we want to see if actually there on the page.
-        $this->assertText('Here is your dna helix', 'The text on the page is correct.');
-    }
+    public function testDnaHelixOutput() {
 
+        $edit = array();
+        $edit['input_code'] = 'A';
+        //Translatable T only for Save//
+        $this->drupalPost('/dna_code', $edit, t('Save'));
+        $this->assertText('T', 'The text is correct');
+    }
 
 }

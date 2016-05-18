@@ -34,7 +34,7 @@ function dna_module_form() {
 
     $form['dna_module_container']['submit'] = array(
         '#type' => 'submit',
-        '#value' => 'Go!'
+        '#value' => 'Save'
     );
 
     return $form;
@@ -85,6 +85,7 @@ function dna_module_form_submit($form, &$form_state) {
 }
 
 function dna_module_result() {
+
     $user_input = $_SESSION['dna_input'];
     $helix_complete = $_SESSION['dna_helix_complete'];
 
